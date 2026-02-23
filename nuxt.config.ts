@@ -2,6 +2,7 @@ import fs from "node:fs";
 import path from "node:path";
 
 const isDev = process.env.NODE_ENV === "development";
+const isProd = !isDev;
 
 const publicDirFolder = isDev ? "staging" : "docs";
 
@@ -13,6 +14,13 @@ const recreateStagingGitKeep = () => {
         console.log(`✔ '${file}' recreated after build`);
     }
 };
+
+const prodConfig = isProd ? {
+    target: 'static',
+    router: {
+        base: '/lvf23.github.io/',
+    },
+} : {};
 
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
@@ -30,4 +38,5 @@ export default defineNuxtConfig({
     },
     css: ["bootstrap/dist/css/bootstrap.min.css"],
     plugins: ["~/plugins/bootstrap.client.ts"],
+    ...prodConfig,
 });
