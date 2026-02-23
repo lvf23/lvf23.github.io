@@ -1,5 +1,6 @@
 {
     "name": "lvf23-site",
+    "version": "0.0.0",
     "type": "module",
     "private": true,
     "scripts": {
